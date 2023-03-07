@@ -1,4 +1,5 @@
 import 'package:coffee_shop_flutter/pages/coffee_page.dart';
+import 'package:coffee_shop_flutter/pages/coffee_type.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -11,12 +12,27 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String? searchedvalue;
+  List coffeeData = [
+    ['Capuccino', true],
+    ['Latte', false],
+    ['Espresso', false]
+  ];
 
   void _onTextChanged(String value) {
     Timer(const Duration(seconds: 1), () {
       setState(() {
         searchedvalue = value;
+        print('${coffeeData.length}');
       });
+    });
+  }
+
+  void coffeeTypeSelected(int index) {
+    setState(() {
+    for(var i = 0; i < coffeeData.length; i++) {
+      coffeeData[i][1] = false;
+    }
+    coffeeData[index][1] = true;
     });
   }
 
@@ -43,11 +59,12 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
+          const SizedBox(height: 20,),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: Text('En sevdiyiniz coffee secin', style: TextStyle(fontSize: 36),),
           ),
-          const SizedBox(height: 20,) ,
+          const SizedBox(height: 40,),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: TextField(
@@ -64,13 +81,28 @@ class _HomePageState extends State<HomePage> {
               onChanged: _onTextChanged
             ),
           ),
+          const SizedBox(height: 20,),
+          SizedBox(
+            height: 40,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: coffeeData.length,
+              itemBuilder: (context, index) {
+                return CoffeeType(coffeeType: coffeeData[index][0], isSelected: coffeeData[index][1], 
+                onTap: () {
+                  coffeeTypeSelected(index);
+                  },
+                );
+              },
+            ),
+          ),
           Expanded(
             // backend'e qosuldugu zaman ListView.Builder cevirin...
             child: Padding(
-              padding: const EdgeInsets.only(top: 50, bottom: 50),
+              padding: const EdgeInsets.only(top: 20, bottom: 50),
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                children: [
+                children: const [
                   CoffeePage(),
                   CoffeePage(),
                   CoffeePage(),
