@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.shopping_basket), label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.notifications), label: '')
         ],
       ),
@@ -65,13 +65,12 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Expanded(
-            flex: 1,
             // backend'e qosuldugu zaman ListView.Builder cevirin...
             child: Padding(
               padding: const EdgeInsets.only(top: 50, bottom: 50),
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                children: const [
+                children: [
                   CoffeePage(),
                   CoffeePage(),
                   CoffeePage(),
