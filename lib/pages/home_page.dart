@@ -1,3 +1,4 @@
+import 'package:coffee_shop_flutter/pages/coffee_page.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -62,7 +63,22 @@ class _HomePageState extends State<HomePage> {
               ),
               onChanged: _onTextChanged
             ),
-          )
+          ),
+          Expanded(
+            flex: 1,
+            // backend'e qosuldugu zaman ListView.Builder cevirin...
+            child: Padding(
+              padding: const EdgeInsets.only(top: 50, bottom: 50),
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: const [
+                  CoffeePage(),
+                  CoffeePage(),
+                  CoffeePage(),
+                ],
+              ),
+            )
+            )
         ],
       ),
     );
