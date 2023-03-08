@@ -14,15 +14,14 @@ class _HomePageState extends State<HomePage> {
   String? searchedvalue;
   List coffeeData = [
     ['Capuccino', true],
-    ['Latte', false],
-    ['Espresso', false]
+    ['Espresso', false],
+    ['Latte', false]
   ];
 
   void _onTextChanged(String value) {
     Timer(const Duration(seconds: 1), () {
       setState(() {
         searchedvalue = value;
-        print('${coffeeData.length}');
       });
     });
   }
@@ -100,13 +99,16 @@ class _HomePageState extends State<HomePage> {
             // backend'e qosuldugu zaman ListView.Builder cevirin...
             child: Padding(
               padding: const EdgeInsets.only(top: 20, bottom: 50),
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: const [
-                  CoffeePage(),
-                  CoffeePage(),
-                  CoffeePage(),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    CoffeePage(coffeeName: coffeeData[0][0], coffeeImgPath: 'lib/images/coffeeimg1.png', ingredients: 'Steamed milk foam, Double espresso, Hot milk.', coffeePrice: 6,),
+                    CoffeePage(coffeeName: coffeeData[1][0], coffeeImgPath: 'lib/images/Espresso.png', ingredients: '1/2 cup ground coffee , 1-1/2 cups cold water.', coffeePrice: 5.70,),
+                    CoffeePage(coffeeName: coffeeData[2][0], coffeeImgPath: 'lib/images/latte.png',  ingredients: 'steamed milk, and a layer of milk foam', coffeePrice: 4,),
+                  ],
+                ),
               ),
             )
             )

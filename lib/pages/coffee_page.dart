@@ -1,6 +1,19 @@
 import 'package:flutter/material.dart';
+
 class CoffeePage extends StatefulWidget {
-  const CoffeePage({super.key});
+
+  final String coffeeImgPath;
+  final String ingredients;
+  final String coffeeName;
+  final double coffeePrice;
+
+  const CoffeePage({
+    Key? key,
+    required this.coffeeImgPath,
+    required this.ingredients,
+    required this.coffeeName,
+    required this.coffeePrice
+  }) : super(key: key);
 
   @override
   State<CoffeePage> createState() => _CoffeePageState();
@@ -21,28 +34,30 @@ class _CoffeePageState extends State<CoffeePage> {
           color: Colors.grey.shade900,
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
-              child: Image.asset('lib/images/coffeeimg1.png')
+              child: Image.asset(widget.coffeeImgPath)
               ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 6),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Capuccino', style: TextStyle(fontSize: 20),),
+                  Text(widget.coffeeName, style: const TextStyle(fontSize: 20),),
                   const SizedBox(height: 4,),
-                  Text('Steamed milk foam, Double espresso, Hot milk', style: TextStyle(color: Colors.grey[600]),)
+                  Text(widget.ingredients, style: TextStyle(color: Colors.grey[600]),),
                 ],
               ),
             ),
+            const SizedBox(height: 8,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('6.00 azn', style: TextStyle(fontSize: 18),),
+                  Text('${widget.coffeePrice} azn', style: const TextStyle(fontSize: 18),),
                   Container(
                     width: 40,
                     height: 40,
